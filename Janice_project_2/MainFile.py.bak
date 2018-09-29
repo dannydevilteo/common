@@ -8,21 +8,17 @@ except AttributeError: raise RuntimeError("Use IDLE")
 class MainForm(object):
     def __init__(self):
         #input student's name START
-        self.student_name = MainForm.inputStdName("\nPlease enter your name according to your NRID or passport (40 char max) : ")
+        self.student_name = MainForm.inputStdName("\nPlease enter your name according to your NRIC or passport (40 char max) : ")
         self.student_name_2 = MainForm.inputExtName("\nPlease enter your extended name if any(40 char max) : ")
         print("Your Name : " ,end=""),color.write(self.student_name.strip()+ " " +self.student_name_2,"STRING")
-        
-        #input student's age START
-        self.student_age = MainForm.inputStudentAge("\nPlease enter your age as of this year, "+datetime.datetime.today().strftime('%Y')+" : ")
-        print("Your Age : " ,end=""),color.write(str(self.student_age),"STRING")
 
         #input nationality
         self.student_nationality = MainForm.inputNationality("\nNationality (40 char max) : ")
         print("Nationality : " ,end=""),color.write(self.student_nationality,"STRING")
 
-        #input student's NRID START
-        self.student_nrid = MainForm.inputNrid("\nNational Registration ID (30 char max) : ")
-        print("National Registration ID : " ,end=""),color.write(self.student_nrid,"STRING")
+        #input student's age START
+        self.student_age = MainForm.inputStudentAge("\nPlease enter your age as of this year, "+datetime.datetime.today().strftime('%Y')+" : ")
+        print("Your Age : " ,end=""),color.write(str(self.student_age),"STRING")
 
         #input Home address line 1
         self.student_address1 = MainForm.inputStdAddr1("\nHome Address (40 char max) : ")
@@ -80,8 +76,7 @@ class MainForm(object):
         except ValueError:
             color.write("Exception in inputStdName(inName)\n","COMMENT")
             return MainForm.inputStdName(inName)
-        
-    #Input validate (EXTENDED_NAME)
+
     def inputExtName(inName2):
         try:
             student_name_2 = input(inName2)
@@ -94,7 +89,7 @@ class MainForm(object):
             color.write("Exception in inputStdName(inName)\n","COMMENT")
             return MainForm.inputExtName(inName2)
 
-    #Input validate (NATIONALITY)
+        #Input validate (NATIONALITY)
     def inputNationality(nationality):
         try:
             student_nationality = input(nationality)
@@ -109,22 +104,6 @@ class MainForm(object):
         except ValueError:
             color.write("Exception in inputNationality(postCode)\n","COMMENT")
             return MainForm.inputNationality(nationality)
-
-    #Input validate (NRID)
-    def inputNrid(nrid):
-        try:
-            student_nrid = input(nrid)
-            if student_nrid.strip() == "":
-                color.write("Nationality must not be empty\n","COMMENT")
-                return MainForm.inputNrid(nrid)
-            elif len(student_nrid) > 40:
-                color.write("Nationality too long. 40 max\n","COMMENT")
-                return MainForm.inputNrid(nrid)
-            else:
-                return student_nrid
-        except ValueError:
-            color.write("Exception in inputNrid(nrid)\n","COMMENT")
-            return MainForm.inputNrid(nrid)
 
     #Input Validate (AGE)
     def inputStudentAge(inAge):
@@ -352,7 +331,7 @@ class MainForm(object):
         self.unit_occupant = str(unit_detail[3]+1)
         self.unit_checkout = datetime.datetime.strptime(self.course_end_date,"%d/%m/%Y")
         self.student_name = self.student_name.strip()+ " " +self.student_name_2
-        self.student_id = self.student_nrid+datetime.datetime.today().strftime("C%Y%m%d%H%M%S") #generate student id with timestamp
+        self.student_id = datetime.datetime.today().strftime("C%Y%m%d%H%M%S") #generate student id with timestamp
 
         #Rental Fees
         rental_fee = DataFileClass.getRates()
@@ -380,7 +359,7 @@ class MainForm(object):
         file.write("{\\rtf1 \sl0 \\b \\fs40Booking Confirmation \\b0 "+str("")
                    + " \\tab \\tab \\tab \line \margl360\margr720\margt720\margb720 \\fs28 \\b Student ID : \\b0 "+str(self.student_id)
                    +" \line \\b Course Name : \\b0 "+self.student_course
-                   +" \line \line "+self.student_name+" \line "+self.student_address1+displayAddress2+" \line "+self.student_poscode+" "+self.student_state+" \line "+self.student_country
+                   +" \line \line "+self.student_name+" \line "+self.student_address1+displayAddress2+" \line "+self.student_poscode+" "+self.student_state+" \line self.country"
                    +"\line \line Dear "+self.student_name
                    +"\line \line This is to inform you know that the University have received your booking to stay at our apartment from " +datetime.datetime.today().strftime('%d %B %Y')+" with the details below :"
                    +"\line \line \\b Unit No. & Name : \\b0 " +self.unit_no.upper()+", "+self.unit_name+ "\line \\b Unit Address : \\b0" +self.unit_address
@@ -391,7 +370,7 @@ class MainForm(object):
                    +"\line \line Kindly obey the house rules which is set by the property management of this University. The property management in collaboration with Student Afair Administration has the right to "
                    +"request the student to vacate the unit if student is found violating the house rules and policy."
                    +"\line We like to thank you and hope you have an enjoyable stay while studying with us."
-                   +"\line \line \line \line APU Student Affairs Administration"
+                   +"\line \line \line \line APU Student Afair Administration"
                    +"\line \line \\fs20 This is a computer generated advice with no signature required"
                    +"}")
 
