@@ -1,0 +1,145 @@
+Login to 10.112.176.60 as estmt
+
+A1. Find for files in /prd/doc1/generate that belongs to owner estmt. Output the result in /home/estmt/training/FindFiles1
+A2. Find for files in /prd/doc1/generate/HK that doesnt belongs to user hkestft. Output the result in /home/estmt/training/FindFiles2
+A3. Find for files in /prd/doc1/generate/HK/scripts that belongs to group bnebsft. Output the result in /home/estmt/training/FindFiles3
+A4. Find for files that were last accessed for more than 100 days in /prd/doc1/generate/HK/input. Output the result in /home/estmt/training/FindFiles4
+A5. Find the files in /home/estmt/training/permission for files with sticky bit permission. Output the result in /home/estmt/training/FindFiles5
+A6. Find files in /prd/doc1/generate/HK/output for file size which is exactly 20mb. Output the result in /home/estmt/training/FindFiles5 and make sure dont overwrite this file
+A7. Find files in /prd/doc1/generate/HK/output for file size which are more than 10mb. Output the result in /home/estmt/training/FindFiles5 and make sure dont overwrite this file
+A8. Find in /prd/doc1/generate/HK/sdmsupload for all files named smartbatch and output the result to /home/estmt/training/FindFiles6
+
+Access the /home/estmt/training/textmodifier file
+B1. Replace the text 'but' to 'anyhow' globally
+B2. Move line 12 to line 2
+B3. Remove line 13
+B4. Go to the last line and add in the word 'Definately' after the word 'Oh, I think we all know he's more than that.'
+B5. Save the textmodifier file
+
+C1. Replace the word Malaysia as Singapore for file /home/estmt/training/textmanipulator. Output the result in /home/estmt/training/ManiFile1
+C2. Replace the word 'manglish' as 'singlish' for file /home/estmt/training/textmanipulator. Output the result in /home/estmt/training/ManiFile2
+C3. Display the line which has Spain as first word in /home/estmt/training/textmanipulator. Output the result in /home/estmt/training/ManiFile3
+C4. Display line 12 to 17 in /home/estmt/training/textmanipulator. Output the result in /home/estmt/training/ManiFile4
+
+D1. Compare the files in /home/estmt/training/difference/ as one of the file is different from the rest. Output the result in /home/estmt/training/DiffFile1
+D2. Execute the program /home/estmt/training/prog/myprog and output the stdout to /home/estmt/training/myprogview1
+D3. Execute the program /home/estmt/training/prog/myprog and output the stderr to /home/estmt/training/myprogviewErr1
+D4. Execute the program /home/estmt/training/prog/myprog and output both stdout and stderr to /home/estmt/training/myprogview2
+
+ssh to 10.198.104.139  from 10.112.176.60 using id ec2-user
+
+E1. Archive all the 3 series scripts 'pestmtmesa3xxxx' in  /prd/estmt/mesa/apps/scripts to /home/ec2-user/training and name the tar file as mesa3series. Compress it using bunzip
+E2. Extract the files from /home/ec2-user/training/adhocscripts.tar.gzip. Make sure the files are extracted directly to path /prd/estmt/mesa/apps/scripts.
+E3. Unzip file /home/ec2-user/training/UnzipThisFile.zip to /prd/estmt
+E4. Zip the file /prd/estmt/mesa/ZipMe.txt as PlsZipMe.zip under /home/ec2-user
+
+F1. Create 3 loop images namely loopimage1, loopimage2, and loopimage3 with 512MB each.
+F2. Assign the filesystem as ext4 to loopimage1 and label it as workfile1
+F3. Create a directory /mnt/tmpmount and mount the loopimage1 to it with user and group quota.
+F4. Make sure files for user and group quota exist after mounting
+F5. Turn on the quota for the filesystem loopimage1
+F6. Assign the filesystem as xfs to loopimage2 and label it as gamingfile
+F7. Create a directory /mnt/gaming and mount loopimage2 persistently so that it will auto mount during boot. (Do not reboot system). Force to mount loopimage2 without reboot
+F8. Make loopimage3 as swap file and make sure that it is available after turning on the swap
+F9. Make loopimage3 as swap persistently to survive reboot
+
+G1. Print the list of partition for /dev/xvda to file /home/ec2-user/training/partfile
+G2. Create a new partition for /dev/xvda as /dev/xvda3
+G3. Create a directory /mnt/tempmem and mount a temporary filesystem call mytemp to it
+G4. Configure it so that it will mount persistently after reboot for question G3.
+G5. Create a physical volume for /dev/xvda1, /dev/xvda2, and /dev/xvda3.(Simulation only)
+G6. Create a volume group call vga1 with those 3 physical volume created in G5.(Simulation only)
+G7. Create a logical volume based on the volume group above with size of 1GB. (Simulation only)
+G8. Extend the logical volume to 1.2GB (Simulation only)
+
+H1. Create 2 loop images namely redunt1 and redunt2 with 512MB each. 
+H2. Create raid device call /dev/md1 for those 2 images under type stripe
+H3. Format the raid device as ext4
+
+I1. Create a loop device namely secretdev1 with size of 256MB.
+I2. Encrypt and set the password as P@ssword123
+I3. Format the device as encryptdev
+I4. format the device encryptdev as ext4
+I5. Create a dir /mnt/encrypted and mount the encrypted device to it
+
+J1. Install firewall tools and utility
+J2. Display the port for pulseaudio service and change the port to 4777
+J3. Add nameserver with ip of 4.4.4.4 to resolver DNS
+J4. Change hostname to bhbackoffice
+J5. Change the dns for 10.198.104.139  to bhbackoffice
+J6. List all the services under internal zone and output it to /home/ec2-user/training/services
+J7. List down the chain for OUTPUT with ip tables and output it to /home/ec2-user/training/iptables
+J8. Add the the rules in INPUT chain for table mangle so that it will block the incoming ip 172.217.3.110
+J9. Remove the rules J8 above after that.
+J9. Display the default gateway and output it to /home/ec2-user/training/gateway
+
+K1. All newly created user will have the file NEWS in their home directory
+K2. Create a user user1 and assign the password as abc123
+K3. Create directory /home/temp and Change the home for user1 as /home/temp/user1
+K4. Make sure the user1 is forced to change password after login
+K5. Create a user user2 and assign the password as qwerty. This user has description as superuser
+K6. user2 is a sudoer user without needing the password to login
+K7. Remove user2 and its home directories as well
+
+L1. Create a group call limited
+L2. Create a user user3 and change the password to 123abc. 
+L3. Assign group limited to user3
+L4. user3 has limited access and restricted to simple command like changing directory
+
+M1. Create a user user4 and the default shell is zsh
+M2. Remove group limited from user3
+M3. set password for user4 as password
+M4. Make sure /bin/java is also included as path for user4
+M5. Switch user as user4 and then try to switch to root. Cancel the request when password is prompted
+
+N1. Copy the logs to indicate that user4 has permission issue to /home/ec2-user/training/unauthorized
+N2. Copy the logs for all installed packages to /home/ec2-user/training/installed
+
+O1. Write a shell file to /home/ec2-user/training/helloworld.sh. This shell will print the date and time, username that is invoking it and also the process that is running under ec2-user. The output will be displayed in /home/ec2-user/training/helloworld
+O2. Schedule a cron job that will trigger the script above for every 5 minutes
+Q3. Schedule a cron job to display the date & time for every hour that appends with string ":current time" and out put to /home/ec2-user/training/everyhour
+Q4. Allow user4 to schedule a cron job  
+
+P1. Create 3 loops images such as spare1, spare2, spare3 with size of 512mb each and make them as physical volume.
+P2. Create a volume group named as vg3 with those 3 physical volumes.
+P3. Create a 1GB logical volume call sparelogvol. 
+P4. Format sparelogvol as ext3
+P5. Create a dir /tmp/logvol and mount the sparelogvol to it
+
+Q1. Limit the max user processes to 10 for group limited. Make sure the setting will survive during reboot
+Q2. Add group limited to user3 and user4.
+Q3. user4 is exempted from the limited max user process under Q1
+Q4. Set priority as 10 to running process infinite_loop.
+Q5. Execute a job in /home/ec2-user/training/fast_job.sh with priority of -10
+
+S1. Delete the file /home/ec2-user/training/deleteme
+S2. Delete the file /home/ec2-user/training/deleteme_too
+S3. Set access to /home/user3 so that only user3 and user4 can access to it
+S4. Set access to /prd/estmt/mesa so that user ec2-user can only have read and write access to that folder
+S5. Remove folder access to /prd/estmt/mesa/staging for user ec2-user
+S6. Create a file call /home/ec2-user/training/unchanged and set an immutable attribute to it
+
+T1. Set the GRUB timeout to 5 seconds
+T2. Back up the bootloader to /root as backupMBR
+
+U1. List all the open files for watchdog command and spool the output to /home/ec2-user/training/openfiles
+
+v1. Display the SELINUX option and output the result to /home/ec2-user/training/selinuxMode
+V2. Enable the SELINUX policy to permissive
+
+X1. create directory /prd/estmt/sg/apps/script and change the permission to 777 at /prd recursively
+X2. Exit from remote to go back to 10.112.176.60 as estmt
+X3. Sync all the files in /prd/estmt/sg/apps/script to the same path in server 10.198.104.139 
+
+***For simulation only becuase there's no actual environment for virtualization
+Y1. Use virsh command to list all domain
+Y2. View domain and node info
+Y3. Start or stop a virtual server
+Y4. Restart a domain
+
+Docker practise at https://training.play-with-docker.com (Accessible from SCB corpnet)
+Z1. Download the latest library of SLES and run a container with a name SLES_library
+Z2. Display the download images and active containers
+Z3. Stop the container and start a new container again with a name SLES_revamped
+Z4. Remote into the container that you have just created above
+
