@@ -1,0 +1,39 @@
+---
+# tasks file for setup-apache
+- name: "Install package"
+  yum:
+    name: httpd
+    state: installed
+  when: ansible_os_family == "RedHat"
+  notify: start_apache
+
+- name: "Install apache2 package"
+  apt:
+    name: apache2
+    state: present
+  when: ansible_os_family == "Debian"
+  notify: start_apache2
+
+- name: copy index.html file
+  copy:
+    src: /opt/ansible/index.html
+    dest: /var/www/html
+    mode: 0666
+
+- name: Ensure the default Apache port is "{{ port }}" on RHEL
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regexp: '^Listen '
+    insertafter: '^#Listen '
+    line: 'Listen {{ port }}'
+  when: ansible_os_family == "RedHat"
+  notify: restart_apache
+
+- name: Ensure the default Apache port is "{{ port }}" on Ubuntu
+  lineinfile:
+    path: /etc/apache2/ports.conf
+    regexp: '^Listen '
+    insertafter: "# /etc/apache2/sites-enabled/000-default.conf"
+    line: 'Listen {{ port }}'
+  when: ansible_os_family == "Debian"
+  notify: restart_apache2
