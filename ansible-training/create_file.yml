@@ -1,0 +1,9 @@
+---
+- name: "Playbook to create file or directory"
+  hosts: all
+  become: true
+  tasks:
+  - name: "Creating a file"
+    file:
+      path: /home/ansadmin/demofile
+      state: touch

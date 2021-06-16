@@ -1,0 +1,12 @@
+---
+- name: "Playbook to copy file or directory"
+  hosts: all
+  become: true
+  tasks:
+  - name: "Copying a file"
+    copy:
+      src: /opt/ansible/index.html
+      dest: /home/ansadmin/github
+      mode: 0644
+      owner: ansadmin
+      group: ansadmin

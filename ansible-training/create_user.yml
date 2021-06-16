@@ -1,0 +1,10 @@
+---
+- name: "Playbook to create user"
+  hosts: all
+  vars_files:
+   - /opt/ansible/user.yml      
+  become: True
+  tasks:
+  - name : "Creating User {{ staff_name }}"
+    user:
+      name: "{{ staff_name }}"

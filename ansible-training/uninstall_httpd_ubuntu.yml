@@ -1,0 +1,13 @@
+---
+- name: "This playbook install Apache package in Ubuntu"
+  hosts: ubuntu
+  become: true
+  tasks:
+  - name: "Start apache2 service"
+    service:
+      name: apache2
+      state: stopped
+  - name: "Install apache2 package"
+    apt:
+      name: apache2
+      state: absent

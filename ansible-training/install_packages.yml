@@ -1,0 +1,9 @@
+---
+- name: "This playbook install packages"
+  hosts: rhel,amazon
+  become: true
+  tasks:
+  - name: "Install package"
+    yum:
+      name: git
+      state: installed

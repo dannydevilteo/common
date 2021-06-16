@@ -1,0 +1,10 @@
+---
+- name: "Ansible playbook to test ansible vault"
+  hosts: all
+  become: true
+
+  tasks:
+  - name: "Clone a repo"
+    git:
+      repo: https://github.com/dannydevilteo/common.git
+      dest: /home/ansadmin/github

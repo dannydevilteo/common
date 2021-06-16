@@ -1,0 +1,39 @@
+---
+- name: "Setup Tomcat"
+  hosts: all
+  become: true
+  tasks:
+    - name: "Installing Java RHEL environment"
+      yum:
+        name: java
+        state: installed
+      when: ansible_os_family == "RedHat"
+
+    - name: "Installing Java Debian environment"
+      apt:
+        name: default-jdk
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: "Download Tomcat packages"
+      get_url:
+       url: https://downloads.apache.org/tomcat/tomcat-9/v9.0.46/bin/apache-tomcat-9.0.46.tar.gz
+       dest: /opt
+      
+    - name: "Decompress Apache packages"
+      unarchive:
+         src: /opt/apache-tomcat-9.0.46.tar.gz
+         dest: /opt
+         remote_src: yes
+         
+    - name: "Add execution permissions on startup.sh file"
+      file:
+        path: /opt/apache-tomcat-9.0.46/bin/startup.sh
+        mode: 0777
+        
+    - name: "Start Tomcat Service"
+      args:
+        chdir: /opt/apache-tomcat-9.0.46/bin
+      shell: nohup ./startup.sh
+
+
